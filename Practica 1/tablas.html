@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablas Alineadas Horizontalmente con Espacio</title>
+    <style>
+        /* Estilo para el contenedor que alinea las tablas */
+        .contenedor-tablas {
+            display: flex;
+            margin: 50px; /* Espacio entre las tablas */
+
+        }
+
+        /* Estilo para cada tabla */
+        table {
+            border-collapse: collapse;
+            width: 50%; /* Ajusta el ancho de las tablas según tus necesidades */
+            margin-right: 20px; /* Espacio entre las tablas */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor de las tablas -->
+    <div class="contenedor-tablas">
+        <!-- Primera tabla -->
+        <table>
+            <tr>
+                <th>Encabezado 1</th>
+                <th>Encabezado 2</th>
+                <th>Encabezado 3</th>
+            </tr>
+            <tr>
+                <td>Dato 1</td>
+                <td>Dato 2</td>
+                <td>Dato 3</td>
+            </tr>
+            <!-- Otras filas... -->
+        </table>
+
+        <!-- Segunda tabla -->
+        <table>
+            <tr>
+                <th>Encabezado A</th>
+                <th>Encabezado B</th>
+                <th>Encabezado C</th>
+            </tr>
+            <tr>
+                <td>Dato X</td>
+                <td>Dato Y</td>
+                <td>Dato Z</td>
+            </tr>
+            <!-- Otras filas... -->
+        </table>
+    </div>
+
+</body>
+</html>

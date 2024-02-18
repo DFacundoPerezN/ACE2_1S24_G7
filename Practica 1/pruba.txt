@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS estacionamiento (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    placa TEXT NOT NULL,
+    hora_entrada TEXT NOT NULL,
+    hora_salida TEXT
+)
+
+CREATE TABLE IF NOT EXISTS estacionamiento (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fecha TEXT NOT NULL,
+    hora TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    rol TEXT NOT NULL,
+    direccion TEXT NOT NULL
+)

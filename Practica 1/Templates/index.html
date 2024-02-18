@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('actualizacion', function(data) {
+            // Manejar la actualización en tiempo real aquí
+            console.log('Actualización en tiempo real recibida:', data.message);
+        });
+
+        
+    </script>
+     <style>
+        body {
+            text-align: center; /* Alinea las imágenes al centro */
+        }
+        img {
+            margin: 1px; /* Añade un margen entre las imágenes */
+            max-width: 33%; /* Ajusta el tamaño máximo de las imágenes al ancho del contenedor */
+            height: auto; /* Mantiene la proporción de aspecto original de las imágenes */
+            display: inline-block; /* Permite alinear las imágenes horizontalmente */
+        }
+        
+    </style>
+
+        <style>
+            /* Estilo para el contenedor que alinea las tablas */
+            .contenedor-tablas {
+                display: flex;
+                margin: 50px; /* Espacio entre las tablas */
+    
+            }
+    
+            /* Estilo para cada tabla */
+            table {
+                border-collapse: collapse;
+                width: 50%; /* Ajusta el ancho de las tablas según tus necesidades */
+                margin-right: 20px; /* Espacio entre las tablas */
+            }
+
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+
+    <title>Estacionamiento</title>
+</head>
+<body>
+    <!-- color a un h -->
+    <style>
+        h1 {
+            color: #284d57;
+        }
+    </style>
+        <script>
+            // Función para actualizar la página cada 5 segundos (5000 milisegundos)
+            function actualizarPagina() {
+                location.reload();
+            }
+            // Llamar a la función cada 5 segundos
+            setInterval(actualizarPagina, 10000);
+        </script>
+    <h1>Dashboard Principal</h1>
+    <!-- linea -->
+    <hr>
+    <body>
+        <!-- <h1>Personas por vehiculo</h1> -->
+        <!-- Mostrar la imagen del gráfico -->
+        <img src="data:image/png;base64,{{ img_base64 }}" alt="Gráfico de Tipo de Movimiento">
+        <!-- <h1>Personas por Rol</h1> -->  
+        <!-- Mostrar la imagen del gráfico -->
+        <img src="data:image/png;base64,{{ img_base64_2 }}" alt="Gráfico de Tipo de Movimiento">
+        <!-- <h1>Espacios Ocupados</h1> -->
+        <!-- Mostrar la imagen del gráfico -->
+        <img src="data:image/png;base64,{{ img_total }}" alt="Gráfico de Tipo de Movimiento">
+    </body>
+    <h1>Seleccionar Fechas</h1>
+    <form method="post">
+        <label for="fecha_inicio">Fecha de Inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+
+        <label for="fecha_fin">Fecha de Fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required>
+
+        <button type="submit">Generar Gráfica</button>
+    
+   
+</form>
+    <img src="data:image/png;base64,{{ img_flujo }}" alt="Gráfico de Tipo de Movimiento">
+    <hr>
+
+
+
+<div class="contenedor-tablas">
+
+    <table id="miTabla" border="1"  class="table table-bordered">
+        >
+        <thead>
+            <tr>
+                <th class="table-info">Ingresos</th>
+            </tr>
+            <tr class="table-info">
+
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tipo Vehiculo</th>
+                <th>Rol Vehiculo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingreso in ingresos %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ ingreso[1] }}</td>
+                    <td>{{ ingreso[2] }}</td>
+                    <td>{{ ingreso[3] }}</td>
+                    <td>{{ ingreso[4] }}</td>
+                    <!-- <td>{{ ingreso[5] }}</td> -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <table id="miTabla1" border="1"  class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th class="table-warning">Egresos</th>
+            </tr>
+            <tr class="table-warning">
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tipo Vehiculo</th>
+                <th>Rol Vehiculo</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for egreso in egresos %}
+            <!-- contador en el for -->
+            <tr>
+                <td>{{ loop.index  }}</td>
+                <td>{{ egreso[1] }}</td>
+                <td>{{ egreso[2] }}</td>
+                <td>{{ egreso[3] }}</td>
+                <td>{{ egreso[4] }}</td>
+                <!-- <td>{{ egreso[5] }}</td> -->
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
