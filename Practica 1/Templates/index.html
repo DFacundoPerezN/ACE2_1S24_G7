@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
     <script type="text/javascript">
         var socket = io.connect('http://' + document.domain + ':' + location.port);
@@ -112,6 +113,53 @@
             </tr>
             <tr class="table-info">
 
+=======
+    <title>Estacionamiento</title>
+</head>
+<body>
+    <h1>Estacionamiento</h1>
+    <!-- <form action="/registrar" method="post">
+        <label for="placa">Placa:</label>
+        <input type="text" name="placa" required>
+        <label for="hora_entrada">Hora de entrada:</label>
+        <input type="text" name="hora_entrada" required>
+        <button type="submit">Registrar</button>
+    </form> -->
+    <table border="1" class="table table-striped-columns">
+        <tr>
+            <th>ID</th>
+            <th>fecha</th>
+            <th>Hora </th>
+            <th>tipo</th>
+            <th>rol</th>
+            <th>direccion</th>
+
+        </tr>
+        {% for registro in registros %}
+            <tr>
+                <td>{{ registro[0] }}</td>
+                <td>{{ registro[1] }}</td>
+                <td>{{ registro[2] }}</td>
+                <td>{{ registro[3] }}</td>
+                <td>{{ registro[4] }}</td>
+                <td>{{ registro[5] }}</td>
+            </tr>
+
+        {% endfor %}
+    </table>
+
+
+    <!--     -->
+
+    <button onclick="mostrarOcultarTabla()" class="btn btn-dark btn-sm">"Ingresos"/ Reporte</button>
+
+    <table id="miTabla" class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th>Ingresos</th>
+            </tr>
+            <tr>
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
                 <th>Id</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -127,12 +175,17 @@
                     <td>{{ ingreso[2] }}</td>
                     <td>{{ ingreso[3] }}</td>
                     <td>{{ ingreso[4] }}</td>
+<<<<<<< HEAD
                     <!-- <td>{{ ingreso[5] }}</td> -->
+=======
+                    <td>{{ ingreso[5] }}</td>
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     
+<<<<<<< HEAD
     <table id="miTabla1" border="1"  class="table table-bordered">
 
         <thead>
@@ -140,6 +193,28 @@
                 <th class="table-warning">Egresos</th>
             </tr>
             <tr class="table-warning">
+=======
+    
+
+    <script>
+        function mostrarOcultarTabla() {
+            var tabla = document.getElementById("miTabla");
+            if (tabla.style.display === "none") {
+                tabla.style.display = "table";
+            } else {
+                tabla.style.display = "none";
+            }
+        }
+    </script>
+ <button onclick="mostrarOcultarTabla1()" class="btn btn-dark btn-sm">"Egresos"/ Reporte</button>
+
+    <table id="miTabla1" class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th>Egresos</th>
+            </tr>
+            <tr>
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
                 <th>Id</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -157,13 +232,53 @@
                 <td>{{ egreso[2] }}</td>
                 <td>{{ egreso[3] }}</td>
                 <td>{{ egreso[4] }}</td>
+<<<<<<< HEAD
                 <!-- <td>{{ egreso[5] }}</td> -->
+=======
+                <td>{{ egreso[5] }}</td>
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
             </tr>
 
         {% endfor %}
         </tbody>
     </table>
+<<<<<<< HEAD
 </div>
 
 </body>
+=======
+
+    <script>
+        function mostrarOcultarTabla1() {
+            var tabla = document.getElementById("miTabla1");
+            if (tabla.style.display === "none") {
+                tabla.style.display = "table";
+            } else {
+                tabla.style.display = "none";
+            }
+        }
+    </script>
+
+<body>
+    <h1>Personas por vehiculo</h1>
+    
+    <!-- Mostrar la imagen del gráfico -->
+    <img src="data:image/png;base64,{{ img_base64 }}" alt="Gráfico de Tipo de Movimiento">
+
+</body>
+<body>
+    <h1>Personas por Rol</h1>
+    
+    <!-- Mostrar la imagen del gráfico -->
+    <img src="data:image/png;base64,{{ img_base64_2 }}" alt="Gráfico de Tipo de Movimiento">
+
+</body>
+<body>
+    <h1>Espacios Ocupados</h1>
+    
+    <!-- Mostrar la imagen del gráfico -->
+    <img src="data:image/png;base64,{{ img_total }}" alt="Gráfico de Tipo de Movimiento">
+</body>
+</body>
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
 </html>

@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for
+<<<<<<< HEAD
 from flask_socketio import SocketIO
 from flask_sse import sse
+=======
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
 import sqlite3
 from datetime import datetime
 import os
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+<<<<<<< HEAD
 import matplotlib.dates as mdates
 from datetime import datetime, timedelta
 
@@ -17,6 +21,10 @@ socketio = SocketIO(app)
 def enviar_actualizacion():
     # Esta función enviará eventos de actualización a través de SocketIO
     socketio.emit('actualizacion', {'message': 'Actualización en tiempo real'})
+=======
+
+app = Flask(__name__)
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
 
 # Configuración de la base de datos
 DATABASE = 'estacionamiento.db'
@@ -42,6 +50,7 @@ def crear_tabla():
     conn.commit()
     conn.close()
 
+<<<<<<< HEAD
 
 ###############
 DATABASE = 'estacionamiento.db'
@@ -141,10 +150,38 @@ def index():
     total_datos = sum(sizes)
     ax.text(0, 0, total_datos, ha='center', va='center', fontsize=14, color='black')
     ax.legend(labels, loc="upper left", bbox_to_anchor=(0.8, 0, 0.2, 1))  # Añadir leyenda
+=======
+@app.route('/')
+def index():
+    crear_tabla()
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM estacionamiento')
+    registros = cursor.fetchall()
+    cursor.execute('SELECT * FROM estacionamiento WHERE direccion = "ingreso"')
+    ingresos = cursor.fetchall()
+    cursor.execute('SELECT * FROM estacionamiento WHERE direccion = "egreso"')
+    egresos = cursor.fetchall()
+
+    ###grafica vehiculo
+    cursor.execute('SELECT tipo, COUNT(*) FROM estacionamiento GROUP BY tipo')
+    datos_pie = cursor.fetchall()
+
+
+    # Crear gráfico pie
+    labels = [f'{dato[0]}\n {dato[1]}' for dato in datos_pie]
+    sizes = [dato[1] for dato in datos_pie]
+
+    fig, ax = plt.subplots()
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, wedgeprops=dict(width=0.4))
+    ax.axis('equal') 
+
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
     # Guardar la figura en un objeto BytesIO
     img_buf = BytesIO()
     plt.savefig(img_buf, format='png')
     img_buf.seek(0)
+<<<<<<< HEAD
     # Convertir la imagen en base64 
     img_base64 = base64.b64encode(img_buf.read()).decode('utf-8')
     ###grafica vehiculo
@@ -164,11 +201,33 @@ def index():
     total_datos = sum(sizes)
     ax.text(0, 0, total_datos, ha='center', va='center', fontsize=14, color='black')
     ax.legend(labels, loc="upper left", bbox_to_anchor=(0.8, 0, 0.2, 1))  # Añadir leyenda
+=======
+
+    # Convertir la imagen en base64 
+    img_base64 = base64.b64encode(img_buf.read()).decode('utf-8')
+    ###grafica vehiculo
+
+    plt.close()  # Cerrar la figura para liberar recursos
+
+
+    cursor.execute('SELECT rol, COUNT(*) FROM estacionamiento GROUP BY rol')
+    datos_pie1 = cursor.fetchall()
+
+
+    # Crear gráfico pie
+    labels = [f'{dato[0]}\n {dato[1]}' for dato in datos_pie1]
+    sizes = [dato[1] for dato in datos_pie1]
+
+    fig, ax = plt.subplots()
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, wedgeprops=dict(width=0.4))
+    ax.axis('equal')  
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
 
     # Guardar la figura en un objeto BytesIO
     img_buf = BytesIO()
     plt.savefig(img_buf, format='png')
     img_buf.seek(0)
+<<<<<<< HEAD
     # Convertir la imagen en base64 
     img_base64_2 = base64.b64encode(img_buf.read()).decode('utf-8')
 ###grafica vehiculo
@@ -180,16 +239,36 @@ def index():
     cursor.execute(f'SELECT COUNT(*) FROM estacionamiento WHERE direccion="egreso" and fecha="{solo_fecha_actual}"')
     ocupados_egreso = cursor.fetchone()[0]
     
+=======
+
+    # Convertir la imagen en base64 
+    img_base64_2 = base64.b64encode(img_buf.read()).decode('utf-8')
+    ###grafica vehiculo
+
+    plt.close()  # Cerrar la figura para liberar recursos
+
+############
+    cursor.execute('SELECT COUNT(*) FROM estacionamiento WHERE direccion="ingreso"')
+    ocupados = cursor.fetchone()[0]
+    total_desocupados = 200 - ocupados
+    cursor.execute('SELECT COUNT(*) FROM estacionamiento WHERE direccion="egreso"')
+    ocupados_egreso = cursor.fetchone()[0]
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
     if total_desocupados < 200:
         total_desocupados = total_desocupados + ocupados_egreso
         ocupados= ocupados - ocupados_egreso
     conn.close()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
     # Crear gráfico de anillo para mostrar ocupados, desocupados y el total
     total = 200
     labels = [f'Ocupados\n{ocupados}', f'Desocupados\n{total_desocupados}']
     sizes = [ocupados, total_desocupados]
     colores = ['#0C22FF', '#D3D6F4']
     fig, ax = plt.subplots()
+<<<<<<< HEAD
     ax.pie(sizes,  startangle=90, wedgeprops=dict(width=0.4), colors=colores)
     ax.axis('equal') 
 
@@ -197,6 +276,11 @@ def index():
     ax.legend(labels, loc="upper left", bbox_to_anchor=(0.8, 0, 0.2, 1))  # Añadir leyenda
     total_text = ocupados
     ax.text(0, 0, total_text, ha='center', va='center', fontsize=14, color='black')
+=======
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, wedgeprops=dict(width=0.4), colors=colores)
+    ax.axis('equal') 
+
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
     # Guardar la figura en un objeto BytesIO
     img_buf = BytesIO()
     plt.savefig(img_buf, format='png')
@@ -207,6 +291,7 @@ def index():
 
     plt.close()  # Cerrar la figura para liberar recursos
 
+<<<<<<< HEAD
 ######################################################################################################################
     # datos_dashboard = obtener_datos_dashboard()
     # img_flujo = generar_grafico_flujo(datos_dashboard)
@@ -222,6 +307,9 @@ def index():
 
     return render_template('index.html',img_flujo=img_flujo,img_total=img_total,img_base64=img_base64, img_base64_2=img_base64_2,registros=registros , ingresos=ingresos, egresos=egresos)
 
+=======
+    return render_template('index.html', img_total=img_total,img_base64=img_base64, img_base64_2=img_base64_2,registros=registros , ingresos=ingresos, egresos=egresos)
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
 
 
 def registro_directo(placa, hora_entrada, direccion):
@@ -236,9 +324,18 @@ def registro_directo(placa, hora_entrada, direccion):
 
 @app.route('/registrar')
 def registrar_desde_python():
+<<<<<<< HEAD
     tipo = 'grande'
     rol = 'catedratico'
     direccion = 'ingreso'
+=======
+
+    tipo = 'grande'
+    rol = 'catedratico'
+    direccion = 'ingreso'
+
+    
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
     cursor.execute('INSERT INTO estacionamiento (fecha, hora, tipo, rol, direccion) VALUES (?, ?, ?, ?, ?)', (fecha_actual,hora_actual, tipo, rol, direccion))
@@ -247,6 +344,7 @@ def registrar_desde_python():
 
     return redirect(url_for('index'))
 
+<<<<<<< HEAD
 
 def registrar_entrada(tipo, rol, direccion):
     fecha_hora_actual = datetime.now()
@@ -266,6 +364,8 @@ def registrar_entrada(tipo, rol, direccion):
 # registrar_entrada('mediano', 'ajeno', 'ingreso')
 
 
+=======
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
 # Nueva ruta para limpiar la base de datos
 @app.route('/limpiar_base_de_datos')
 def limpiar_base_de_datos():
@@ -289,4 +389,8 @@ def eliminar_base_de_datos():
     
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     socketio.run(app, debug=True)
+=======
+    app.run(debug=True)
+>>>>>>> 1a86be9416dd354047e223de9f2507d9422af7a0
