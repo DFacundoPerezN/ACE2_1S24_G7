@@ -15,9 +15,6 @@
 */
 
 #include <Arduino_APDS9960.h>
-String direccion;
-String tipo;
-String rol="ajeno";
 
 void setup() {
   Serial.begin(9600);
@@ -31,6 +28,7 @@ void setup() {
 
 int proximity = 0;
 int r = 0, g = 0, b = 0;
+int gesture = 0;
 unsigned long lastUpdate = 0;
 
 void loop() {
@@ -42,66 +40,24 @@ void loop() {
 
   // Check if a gesture reading is available
   if (APDS.gestureAvailable()) {
-    int gesture = APDS.readGesture();
-    switch (gesture) {
-      case GESTURE_UP:
-        //Serial.println("Detected UP gesture");
-        direccion = "ingreso";
-        break;
-
-      case GESTURE_DOWN:
-        //Serial.println("Detected DOWN gesture");
-        direccion = "regreso";
-        break;
-
-      case GESTURE_LEFT:
-        //Serial.println("Detected LEFT gesture");
-        direccion = "ingreso";
-        break;
-
-      case GESTURE_RIGHT:
-        //Serial.println("Detected RIGHT gesture");
-        direccion = "regreso";
-        break;
-
-      default:
-        // Ignore
-        break;
-    }
+    gesture = APDS.readGesture();
   }
 
   // Check if a color reading is available
   if (APDS.colorAvailable()) {
     APDS.readColor(r, g, b);
   }
-
+ //HACER REVISION DE LA OBTENCION DE MOVIMIENTO; PARA QUE SE DETECTEN AL MISMO TIEMPO QUE DISTANCIA Y RGB
   // Print updates every 100 ms
-  if (millis() - lastUpdate > 100) {
+  if (millis() - lastUpdate > 3000) {
     lastUpdate = millis();
-    //Serial.print("PR=");
-    //Serial.print(proximity);
-    if(proximity<150){
-      tipo = "grande";
-    }else if(proximity<750){
-      tipo = "mediano";
-    }else {
-      tipo = "pequeño";
-    }
+    Serial.print("PR=");
+    Serial.print(proximity);
     Serial.print(" RGB=");
     Serial.print(r);
     Serial.print(",");
     Serial.print(g);
-    Serial.print(",");    
+    Serial.print(",");
     Serial.println(b);
-    if((b-r)>50 && b>g){//azul
-      rol="trabajador";
-    }else if((r-g)>75){//rojo
-      rol="estudiante";
-    }else if(g>150 && g>b && abs(g-r)<50){
-      rol="catedratico";
-    }else{
-      rol="ajeno";
-    }
-    Serial.println(tipo+";"+rol+";"+direccion);
   }
 }
