@@ -59,5 +59,30 @@ void loop() {
     Serial.print(g);
     Serial.print(",");
     Serial.println(b);
+    switch (gesture) {
+      case GESTURE_UP:
+        Serial.println("DR=");
+        Serial.println("arriba ");
+        break;
+
+      case GESTURE_DOWN:
+        Serial.println("DR=");
+        Serial.println("abajo ");
+        break;
+
+      case GESTURE_LEFT:
+        Serial.println("DR=");
+        Serial.println("invalida ");
+        break;
+
+      case GESTURE_RIGHT:
+        Serial.println("DR=");
+        Serial.println("invalida ");
+        break;
+
+      default:
+        // Ignore
+        break;
+    }
   }
 }
