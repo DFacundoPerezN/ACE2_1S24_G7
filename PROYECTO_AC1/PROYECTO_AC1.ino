@@ -18,24 +18,24 @@ void setup() {
 
 void loop() {
   int contadorLista = 0;
+  pruebaDistancias(18);
+  // for(int angle = 90; angle >= -90; angle -= 18) {
+  //   myServo.write(angle);
+  //   digitalWrite(trigpin1, HIGH);  
+  //   delayMicroseconds(25);  
+  //   digitalWrite(trigpin1, LOW);  
+  //   duration = pulseIn(echopin1, HIGH);  
+  //   distance = duration * 0.034 / 2;  
+  //   Serial.println(distance);  
+  //   Serial.print("--"); 
+  //   Serial.println(contadorLista); 
+  //   delay(400);  
+  //   decidirGuardar(distance, contadorLista);
+  //   contadorLista++;
+  //   delay(400);
+  // }
 
-  for(int angle = 90; angle >= -90; angle -= 18) {
-    myServo.write(angle);
-    digitalWrite(trigpin1, HIGH);  
-    delayMicroseconds(25);  
-    digitalWrite(trigpin1, LOW);  
-    duration = pulseIn(echopin1, HIGH);  
-    distance = duration * 0.034 / 2;  
-    Serial.println(distance);  
-    Serial.print("--"); 
-    Serial.println(contadorLista); 
-    delay(400);  
-    decidirGuardar(distance, contadorLista);
-    contadorLista++;
-    delay(400);
-  }
-
-  impirmirDistancias();
+  //impirmirDistancias();
   
   Serial.println("\n \n \n "); 
 }
@@ -60,4 +60,16 @@ void decidirGuardar(int distance, int contador){
       Serial.println("Seguardo la distancia ");
     }
   }
+}
+
+void pruebaDistancias(int angle){
+  myServo.write(angle);
+  digitalWrite(trigpin1, HIGH);  
+  delayMicroseconds(25);  
+  digitalWrite(trigpin1, LOW);  
+  duration = pulseIn(echopin1, HIGH);  
+  distance = duration * 0.034 / 2;  
+  Serial.println(distance);  
+  delay(700);
+
 }
