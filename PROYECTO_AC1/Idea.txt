@@ -1,0 +1,15 @@
+Hacer una matriz para enviar por medio de Serial, hacia Python con la
+siguiente sintaxis:
+
+"1,0,0,0;1,0,0,0;1,0,0,0;1,0,0,0"
+
+Esta le vamos a hacer un split dentro de python en el cual primero
+separamos por medio de un punto y coma para obtener asi cada una de las 
+filas, luego cada columna se encuentra separada por medio de una coma
+
+Al tener eso probar como vamos a enviar los datos al front, si con
+formato json o de que forma
+
+tambien ver de que forma vamos a subir los datos a la DB
+
+Podemos probar FastApi para el backend
