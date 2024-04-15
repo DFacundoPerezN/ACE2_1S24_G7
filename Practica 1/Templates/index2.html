@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body {
+            text-align: center; /* Alinea las imágenes al centro */
+        }
+        img {
+            margin: 1px; /* Añade un margen entre las imágenes */
+            max-width: 33%; /* Ajusta el tamaño máximo de las imágenes al ancho del contenedor */
+            height: auto; /* Mantiene la proporción de aspecto original de las imágenes */
+            display: inline-block; /* Permite alinear las imágenes horizontalmente */
+        }
+
+            th {
+                background-color: #f2f2f2;
+            }
+            h1 {
+            color: #284d57;
+            font-size: 3em;
+            padding: 10px;
+        }
+        
+    </style>
+    <h1>Dashboard Secundario</h1>
+    <h2>Si funcionooooo</h2>
+        <!-- <h1>Personas por vehiculo</h1> -->
+        <!-- Mostrar la imagen del gráfico -->
+    <!-- <img src="data:image/png;base64,{{ img_barras }}" alt="Gráfico de Tipo de Roles"> -->
+    <!-- <img id="grafica" src="data:image/png;base64,{{ img_ingresos }}" alt="Gráfica de Ingresos"> -->
+
+    <h1>Generar Gráfica de Ingresos</h1>
+    <form id="formulario" action="/" method="post">
+        <label for="fecha_inicio">Fecha de inicio:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        <br>
+        <label for="fecha_fin">Fecha de fin:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required>
+        <br>
+        <button type="submit">Generar Gráfica</button>
+    </form>
+    <img id="img_in" src="data:image/png;base64,{{ img_barras }}" alt="Gráfica de Ingresos">
+
+    {% if img_ingresos %} 
+    <img id="img_in" src="data:image/png;base64,{{ img_ingresos }}" alt="Gráfica de Ingresos">
+    {% endif %} 
+    <img id="img_in" src="data:image/png;base64,{{ img_ingresos }}" alt="Gráfica de Ingresos">
+
+    <script>
+        // Evitar recarga de la página al enviar el formulario
+        document.getElementById('formulario').addEventListener('submit', function(event) {
+            event.preventDefault();
+            enviarFormulario();
+            
+        });
+    
+        function enviarFormulario() {
+            // Obtener fechas del formulario
+            var fechaInicio = document.getElementById('fecha_inicio').value;
+            var fechaFin = document.getElementById('fecha_fin').value;
+    
+            // Crear objeto FormData con las fechas
+            // print("valores de datos =====", fechaInicio, fechaFin)
+            var formData = new FormData();
+            formData.append('fecha_inicio', fechaInicio);
+            formData.append('fecha_fin', fechaFin);
+    
+            // Enviar solicitud POST al servidor
+            fetch('/index2.html', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                
+                return response.text();
+                
+            })
+            .then(html => {
+            // Crear un elemento temporal para extraer la imagen de la respuesta HTML
+            var tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                var imgSrc = tempDiv.querySelector('img').getAttribute('src');
+
+                // Esperar a que la imagen se cargue completamente
+                var imgElement = new Image();
+                imgElement.onload = function () {
+                    // Actualizar el contenido de la página con la nueva gráfica
+                    document.getElementById('img_in').src = imgSrc;
+                };
+                imgElement.src = imgSrc;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+        </body>
+
+</html>
