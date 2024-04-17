@@ -20,14 +20,44 @@ contador = 0
 
 while True:
      
-     registroDB = DbInfo()
-     tamanio = 0
      #cad =serialArduino.readline().decode('ascii') 
 
      information =serialArduino.readline()
      
-     information = information.decode('utf-8').strip('\n').strip('\r').split()
-     #print(information)
+     information = information.decode('utf-8').strip('\n').strip('\r').split(":")
+     print(information)
+     
+     if "Habitacion1" in information:
+         rows = information[1].split(";")
+         for i,position in zip(range(len(rows[0].split(","))),rows[0].split(",")):
+             if position == "1":
+                 print(f"Se encontro persona en 0,{i}")
+            
+             else:
+                continue
+        
+         for i,position in zip(range(len(rows[1].split(","))),rows[1].split(",")):
+             if position == "1":
+                 print(f"Se encontro persona en 1,{i}")
+            
+             else:
+                 continue
+        
+         for i,position in zip(range(len(rows[2].split(","))),rows[2].split(",")):
+             if position == "1":
+                 print(f"Se encontro persona en 2,{i}")
+            
+             else:
+                 continue
+        
+         for i,position in zip(range(len(rows[3].split(","))),rows[3].split(",")):
+             if position == "1":
+                 print(f"Se encontro persona en 3,{i}")
+            
+             else:
+                 continue
+                    
+    
     
                               
 serialArduino.close()
