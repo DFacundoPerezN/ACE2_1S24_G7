@@ -6,8 +6,8 @@ Servo myServo2;
 Servo myServo3;  
 Servo myServo4;  
 Servo myServo5;  
-const int trigpin1= 8;  
-const int echopin1= 7;  
+const int trigpin1= 7;  
+const int echopin1= 6;  
 
 const int trigpin2= 13;  
 const int echopin2= 12;  
@@ -18,8 +18,8 @@ const int echopin3= 26;
 const int trigpin4= 35;  
 const int echopin4= 33; 
 
-const int trigpin5= 47;  
-const int echopin5= 45;  
+const int trigpin5= 53;  
+const int echopin5= 52;  
 
 long duration;  
 int distance;  
@@ -33,6 +33,14 @@ String salida5 = "Habitacion5:0,0,0,0;0,0,0,0;0,0,0,0;0,0,0,0";
 void setup() {
   pinMode(trigpin1,OUTPUT);  
   pinMode(echopin1,INPUT); 
+  pinMode(trigpin2,OUTPUT);  
+  pinMode(echopin2,INPUT); 
+  pinMode(trigpin3,OUTPUT);  
+  pinMode(echopin3,INPUT); 
+  pinMode(trigpin4,OUTPUT);  
+  pinMode(echopin4,INPUT); 
+  pinMode(trigpin5,OUTPUT);  
+  pinMode(echopin5,INPUT); 
   myServo1.attach(4);
   myServo2.attach(10);
   myServo3.attach(22);
@@ -126,6 +134,7 @@ void loop() {
   // String salidaH4 = "Habitacion4:0,0,0,0;0,0,0,0;0,0,0,0;0,0,0,0"; //primer 0 en posicion [12]
 
   //pruebaDistancias(90);
+  //pruebaDistancias2(90);
   for(int angle = 90; angle >= 0; angle -= 15) {
     myServo1.write(angle);
     myServo2.write(angle);
@@ -138,7 +147,7 @@ void loop() {
     duration = pulseIn(echopin1, HIGH);  
     distance = duration * 0.034 / 2;  
     //Serial.println("");  
-   // Serial.print(distance);  
+    //Serial.print(distance);  
     delay(700); 
     //Serial.print("-- en: "); 
     //Serial.println(angle); 
@@ -146,14 +155,34 @@ void loop() {
     //Serial.println("salidaH1 " + salida);
     delay(400);  
     //decidirGuardar(distance, contadorLista);
-    distance = distanceH2;    
+    distance = distanceH2();    
+    Serial.print(distance);    Serial.print("-- en H2: ");     Serial.println(angle); 
     map2Position(angle,distance);
-    //contadorLista++;
-    delay(400);
+    ////contadorLista++;
+    delay(40);  
+    //decidirGuardar(distance, contadorLista);
+    distance = distanceH3();    
+    //Serial.print(distance);    Serial.print("-- en H3: ");     Serial.println(angle); 
+    map3Position(angle,distance);
+    delay(40);
+
+    distance = distanceH4();    
+    //Serial.print(distance);    Serial.print("-- en H4: ");     Serial.println(angle); 
+    map4Position(angle,distance);
+    delay(40);
+
+    distance = distanceH5();    
+    //Serial.print(distance);    Serial.print("-- en H5: ");     Serial.println(angle); 
+    map5Position(angle,distance);
+    delay(40);
     distance=0;
     duration =0;
   }
-  Serial.println(salida);
+  Serial.println(salida); 
+  Serial.println(salida2);  
+  Serial.println(salida3);  
+  Serial.println(salida4);  
+  Serial.println(salida5);
   //impirmirDistancias();
   delay(400);
   //Serial.println("\n \n \n "); 
@@ -178,7 +207,9 @@ int distanceH2() {
   digitalWrite(trigpin2, HIGH);  
   delayMicroseconds(25);  
   digitalWrite(trigpin2, LOW);  
-  return pulseIn(echopin2, HIGH) * 0.034 / 2; 
+  int distance = pulseIn(echopin2, HIGH) * 0.034 / 2;
+  //Serial.println(distance);  
+  return  distance;
 }
 
 int distanceH3() {
@@ -211,8 +242,18 @@ void pruebaDistancias(int angle){
   distance = duration * 0.034 / 2;  
   Serial.println(distance);  
   delay(700);
-
 }
+void pruebaDistancias2(int angle){
+  myServo2.write(angle);
+  // digitalWrite(trigpin2, HIGH);  
+  // delayMicroseconds(25);  
+  // digitalWrite(trigpin2, LOW);  
+  // duration = pulseIn(echopin2, HIGH);  
+  // distance = duration * 0.034 / 2;  
+  Serial.println(distanceH2());  
+  delay(700);
+}
+
 
 void map2Position(int angulo,int distancia) {
   switch (angulo) {
@@ -251,7 +292,7 @@ void map2Position(int angulo,int distancia) {
   case 30:
     if (distancia >= 9 && distancia <= 11) {
       salida2[38] = '1';
-    //  Serial.println("Se leyo persona");  
+     Serial.println("Se leyo persona");  
     } else if (distancia >= 3 && distancia <= 6){
       salida2[32] = '1';
     } 
