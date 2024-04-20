@@ -1,0 +1,135 @@
+.App {
+  text-align: center;
+}
+
+.formulario-container {
+  display:flex;
+  /* flex-direction: row; */
+  justify-content: center;
+
+  /* justify-content: flex-start; */
+}
+.formulario {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.h1{
+  color: #92e7d5;
+  font-style: italic;
+  font-variant: small-caps;
+  /* font-family: monospace; */
+  text-transform: capitalize;  
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px; /* Ancho del borde */
+  -webkit-text-stroke-color: black; /* Color del borde */
+}
+.h1_c {
+  color: #dfd4e0;
+  font-style: italic;
+  font-variant: small-caps;
+  /* font-family: monospace; */
+  text-transform: capitalize;  
+  font-weight: bold;
+  -webkit-text-stroke-width: 1px; /* Ancho del borde */
+  -webkit-text-stroke-color: black; /* Color del borde */
+  font-size: 1.5em;
+  padding: 10px;
+}
+
+.form-group {
+  margin-right: 20px;
+}
+/* Estilos para el label */
+.label-custom {
+  font-style: italic;
+  font-variant: small-caps;
+  display: inline-block;
+  padding: 0.2em 0.5em; /* Ajusta el espaciado interno según sea necesario */
+  font-size: 1em; /* Tamaño de fuente similar al de los campos de entrada */
+  /* border: 1px solid #080808; Bordes similares a los campos de entrada */
+  border-radius: 4px; /* Esquinas redondeadas similares a los campos de entrada */
+  background-color: rgb(255, 255, 255); /* Fondo blanco similar a los campos de entrada */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el label */
+}
+
+/* Estilos para el label cuando está enfocado */
+.label-custom:focus {
+  
+  outline: none; /* Elimina el contorno del label cuando está enfocado */
+  border-color: dodgerblue; /* Cambia el color del borde al estar enfocado */
+}
+.input-custom {
+  font-style: italic;
+  /* font-variant: small-caps; */
+  padding: 0.5em; /* Ajusta el espaciado interno según sea necesario */
+  font-size: 1em; /* Tamaño de fuente */
+  border: 1px solid #1b1b1b; /* Borde */
+  border-radius: 4px; /* Esquinas redondeadas */
+  background-color: white; /* Fondo blanco */
+}
+.heatmap-label {
+  font-family: Arial, sans-serif; /* Tipo de fuente */
+  font-size: 12px; /* Tamaño de fuente */
+  font-weight: bold; /* Peso de la fuente */
+  color: #333; /* Color del texto */
+  /* Otros estilos según tus preferencias */
+}
+/* Estilos para el input cuando está enfocado */
+.input-custom:focus {
+  outline: none; /* Elimina el contorno cuando está enfocado */
+  border-color: dodgerblue; /* Cambia el color del borde al estar enfocado */
+}
+
+
+.select{
+  font-style: italic;
+  font-variant: small-caps;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* .h1{
+  color: #9c2525;
+  font: 1em sans-serif;
+  margin-bottom: 10px;
+} */
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
