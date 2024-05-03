@@ -4,17 +4,21 @@ import time
 import webbrowser
 
 def newMeet():
+    xReunion = 230
+    yReunion = 700
     #Abrimos el navegador predilecto y ponemos en el buscador el link de la pagina de meet
     webbrowser.open("https://meet.google.com")
-    time.sleep(1.5)   #esperamos 1.5 segundos
+    time.sleep(2)   #esperamos 1.5 segundos
     #Posicionamos el cursor (mouse) en la posicion especificada 
-    pyautogui.moveTo(230, 660)   #posicion del botón "Nueva llamada"
+    pyautogui.moveTo(xReunion, yReunion)   #posicion del botón "Reunion Nueva"
     time.sleep(0.4)                   
     pyautogui.click()   #Se realiza un click  
-    pyautogui.moveTo(300, 710)   #posicion del botón "Iniciar una llamada ahora"
+    xIniciar = 300
+    yIniciar = 760
+    pyautogui.moveTo(xIniciar, yIniciar)   #posicion del botón "Iniciar una llamada ahora"
     time.sleep(0.4)                   
     pyautogui.click()   #Se realiza un click  
-    time.sleep(3)   #esperamos 3 segundos
+    time.sleep(6)   #esperamos 3 segundos
     #Para enviar el mensaje haremos que abra la sección de comentarios con uan combinación de teclas
     pyautogui.hotkey('ctrlleft', 'altleft', 'c')
     time.sleep(1)  
@@ -22,27 +26,20 @@ def newMeet():
     pyautogui.press('Enter')
 
 def closeMeet():
-    navegador = 'firefox'
-    xSalirLlamada = 1175
-    ySalirLlamada = 1000
-    xFinalizarTodos = 1010
-    yFinalizarTodos = 625
-    # Open web browser
-    pyautogui.press('win')
-    pyautogui.typewrite(navegador)
-    pyautogui.press('enter')
-    time.sleep(1.5)   #esperamos 1.5 segundos
+    xSalir = 1220
+    ySalir = 980
     #Posicionamos el cursor (mouse) en la posicion especificada 
-    pyautogui.moveTo(xSalirLlamada, ySalirLlamada)   #posicion del botón "Nueva llamada"
+    pyautogui.moveTo(xSalir, ySalir)   #posicion del botón de colgar
     time.sleep(0.4)                   
     pyautogui.click()   #Se realiza un click  
-    pyautogui.moveTo(xFinalizarTodos, yFinalizarTodos)   #posicion del botón "Iniciar una llamada ahora"
+    xIniciar = 1050
+    yIniciar = 650
+    pyautogui.moveTo(xIniciar, yIniciar)   #posicion del botón "Iniciar una llamada ahora"
     time.sleep(0.4)                   
     pyautogui.click()   #Se realiza un click  
 
 if __name__ == '__main__':
-    #newMeet()
-    closeMeet()
+    newMeet()
 
 '''
 # Open web browser
